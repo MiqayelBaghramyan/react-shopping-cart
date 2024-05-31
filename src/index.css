@@ -165,6 +165,62 @@ p {
 }
 
 
-.filter div{
+.filter div {
+  flex: 1;
+}
+
+
+
+/* Index.css */
+
+.cart {
+  padding: 25.5px;
+  display: flex;
+}
+
+
+.cart-header {
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.cart-items {
+  width: 100%;
+  list-style-type: none;
+}
+
+.cart-items img {
+  width: 80px;
+}
+
+.cart-items li {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.cart-items div {
+  padding: 10px;
+}
+
+.cart-items li :last-child {
+  flex: 1;
+}
+
+.right {
+  text-align: right;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.total > div{
+  font-size: 2rem;
+}
+
+.total > div, .total > button {
   flex: 1;
 }
