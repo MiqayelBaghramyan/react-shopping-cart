@@ -174,13 +174,14 @@ p {
 /* Index.css */
 
 .cart {
-  padding: 25.5px;
+  padding: 20.5px;
   display: flex;
+  margin: 10px;
 }
 
 
 .cart-header {
-  border-bottom: 1px solid #c0c0c0;
+  border-bottom: 0.1rem #c0c0c0 solid;
 }
 
 .cart-items {
@@ -196,6 +197,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: start;
+  
 }
 
 .cart-items div {
@@ -223,4 +225,33 @@ p {
 
 .total > div, .total > button {
   flex: 1;
+}
+
+
+.notification{
+  width: 70%;
+  position: relative;
+  left: 20px;
+}
+
+
+/* Chejout form */
+
+form{
+  width: 100%;
+}
+
+.form-container{
+  list-style-type: none;
+}
+
+.form-container li{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+input{
+  padding: 10px;
+  border: 1px solid #c0c0c0;
 }
