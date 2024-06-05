@@ -9,17 +9,21 @@ class App extends React.Component {
     super();
     this.state = {
       products: data.products,
-      cartItems: [],
+      cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
       size: "",
       sort: "",
     };
   }
 
+  createOrder = () => {
+    alert("Need To Save order for" + this.createOrder.name)
+  }
+
   addToCart = (product) => {
     const cartItems = this.state.cartItems.slice();
     let alreadyInCart = false;
-    cartItems.forEach(item => {
-      if (item._id === product._id) {  // Fix the key from id to _id
+    cartItems.forEach((item) => {
+      if (item._id === product._id) {
         item.count++;
         alreadyInCart = true;
       }
@@ -27,47 +31,57 @@ class App extends React.Component {
     if (!alreadyInCart) {
       cartItems.push({ ...product, count: 1 });
     }
-    this.setState({ cartItems });
-  }
+    this.setState({ cartItems }, () => {
+      localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems));
+    });
+  };
 
   clearCart = () => {
-    this.setState({ cartItems: [] });
+    this.setState({ cartItems: [] }, () => {
+      localStorage.removeItem("cartItems");
+    });
   };
 
   removeFromCart = (product) => {
-    const cartItems = this.state.cartItems.slice();
-    this.setState({ cartItems: cartItems.filter(x => x._id !== product._id) })
-  }
+    const cartItems = this.state.cartItems.filter(
+      (item) => item._id !== product._id
+    );
+    this.setState({ cartItems }, () => {
+      localStorage.removeItem("cartItems", JSON.stringify(cartItems));
+    });
+  };
 
   sortProducts = (e) => {
     const sort = e.target.value;
     this.setState((state) => ({
       sort: sort,
-      products: this.state.products.slice().sort((a, b) =>
-        sort === "lowest"
-          ? a.price > b.price
-            ? 1
-            : -1
-          : sort === "highest"
-            ? a.price < b.price
+      products: this.state.products
+        .slice()
+        .sort((a, b) =>
+          sort === "lowest"
+            ? a.price > b.price
               ? 1
               : -1
-            : a._id > b._id
-              ? 1
-              : -1
-      ),
+            : sort === "highest"
+              ? a.price < b.price
+                ? 1
+                : -1
+              : a._id > b._id
+                ? 1
+                : -1
+        ),
     }));
   };
 
   filterProducts = (e) => {
-    if (e.target.value === "") {
-      this.setState({ size: e.target.value, products: data.products });
+    const size = e.target.value;
+    if (size === "") {
+      this.setState({ size, products: data.products });
     } else {
       this.setState({
-        size: e.target.value,
+        size,
         products: data.products.filter(
-          (product) =>
-            product.availableSizes.indexOf(e.target.value) >= 0
+          (product) => product.availableSizes.indexOf(size) >= 0
         ),
       });
     }
@@ -90,19 +104,23 @@ class App extends React.Component {
                 filterProducts={this.filterProducts}
                 sortProducts={this.sortProducts}
               />
-              <Products products={this.state.products} addToCart={this.addToCart} />
+              <Products
+                products={this.state.products}
+                addToCart={this.addToCart}
+              />
             </div>
             <div className="sidebar">
-              <Cart 
-                cartItems={this.state.cartItems} 
-                removeFromCart={this.removeFromCart} 
-                clearCart={this.clearCart} // Corrected method name
+              <Cart
+                cartItems={this.state.cartItems}
+                removeFromCart={this.removeFromCart}
+                clearCart={this.clearCart}
+                createOrder={this.createOrder}
               />
             </div>
           </div>
         </main>
 
-        <footer>All right is reserved</footer>
+        <footer>All rights reserved</footer>
       </div>
     );
   }
