@@ -197,7 +197,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: start;
-  
+
 }
 
 .cart-items div {
@@ -219,16 +219,17 @@ p {
   width: 100%;
 }
 
-.total > div{
+.total>div {
   font-size: 2rem;
 }
 
-.total > div, .total > button {
+.total>div,
+.total>button {
   flex: 1;
 }
 
 
-.notification{
+.notification {
   width: 70%;
   position: relative;
   left: 20px;
@@ -237,21 +238,70 @@ p {
 
 /* Chejout form */
 
-form{
+form {
   width: 100%;
 }
 
-.form-container{
+.form-container {
   list-style-type: none;
 }
 
-.form-container li{
+.form-container li {
   display: flex;
   flex-direction: column;
   padding: 10px;
 }
 
-input{
+input {
   padding: 10px;
   border: 1px solid #c0c0c0;
+}
+
+.addToCart {
+  width: 30%;
+  height: 50px;
+  border: none;
+  background: #f0c040;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+
+.product-details {
+  width: 100%;
+}
+
+
+.img-product {
+  width: 350px;
+}
+
+.AllModal {
+  /* width: 70%; */
+  position: absolute;
+  inset: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.closeModal {
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 50px;
+  right: 50px;
 }
